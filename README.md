@@ -1,9 +1,6 @@
 # HWSW2-MIDI
 
 ## How to use
-create virtual environment
-
-``python -m venv myenv``
 
 activate virtual environment
 
