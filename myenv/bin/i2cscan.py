@@ -1,4 +1,4 @@
-#!/home/gwenz/piezo_led_copy/myenv/bin/python3
+#!/home/gwenz/HWSW2_MIDI/myenv/bin/python
 # -*- coding: utf-8 -*-
 
 # Copyright (c) 2018-2024, Emmanuel Blot <emmanuel.blot@free.fr>

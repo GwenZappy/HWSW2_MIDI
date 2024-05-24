@@ -1,4 +1,4 @@
-#!/home/gwenz/piezo_led_copy/myenv/bin/python3
+#!/home/gwenz/HWSW2_MIDI/myenv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
