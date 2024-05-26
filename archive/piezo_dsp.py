@@ -32,7 +32,7 @@ num_pixels = 10
 pixels = neopixel.NeoPixel(pixel_pin, num_pixels, auto_write=False)
 
 # Setup thresholds and timing
-threshold = 30
+threshold = 100
 max_raw_value = 1023
 debounce_time = 0.1  # Cooldown period to prevent multiple detections
 last_impact_time = 0
