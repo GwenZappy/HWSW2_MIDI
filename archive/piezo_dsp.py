@@ -22,7 +22,7 @@ def map_value(value, from_low, from_high, to_low, to_high):
     exp_ratio = range_ratio ** 0.5  # Apply square root to increase sensitivity
     return (exp_ratio * (to_high - to_low)) + to_low
 
-def low_pass_filter(new_value, last_value, alpha=0.1):
+def low_pass_filter(new_value, last_value, alpha=0.5):
     """Apply low-pass filter to smooth the signal."""
     return alpha * new_value + (1 - alpha) * last_value
 

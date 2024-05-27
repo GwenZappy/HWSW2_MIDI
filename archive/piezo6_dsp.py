@@ -42,7 +42,7 @@ base_colors = [
 ]
 
 # Setup thresholds and timing for each sensor
-thresholds = [150] * 6  # Same threshold for simplicity, adjust per sensor as needed
+thresholds = [50] * 6  # Same threshold for simplicity, adjust per sensor as needed
 max_raw_value = 1023
 debounce_time = 0.1
 last_impact_time = [0] * 6

@@ -21,7 +21,7 @@ def map_value(value, from_low, from_high, to_low, to_high):
     exp_ratio = range_ratio ** 0.5
     return (exp_ratio * (to_high - to_low)) + to_low
 
-def low_pass_filter(new_value, last_value, alpha=0.5):
+def low_pass_filter(new_value, last_value, alpha=0.2):
     """Apply low-pass filter to smooth the signal."""
     return alpha * new_value + (1 - alpha) * last_value
 
@@ -41,7 +41,7 @@ colors = [
 ]
 
 # Setup thresholds and timing for each sensor
-threshold = [150] * 6
+threshold = [300] * 6
 max_raw_value = 1023
 debounce_time = 0.1
 last_impact_time = [0] * 6
