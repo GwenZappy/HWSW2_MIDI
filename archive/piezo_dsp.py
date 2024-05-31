@@ -62,4 +62,4 @@ while True:
             pixels.fill((0, 0, 0))
             pixels.show()
 
-    sleep(0.01)  # Sleep to reduce CPU usage
+    #sleep(0.01)  # Sleep to reduce CPU usage

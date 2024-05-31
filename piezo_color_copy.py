@@ -17,21 +17,9 @@ def read_adc(channel):
 
 def map_value(value, from_low, from_high, to_low, to_high):
     """Map value to a different range, applying a square root to increase sensitivity at lower range."""
-    if value < from_low:
-        value = from_low
-    elif value > from_high:
-        value = from_high
     range_ratio = (value - from_low) / (from_high - from_low)
     exp_ratio = range_ratio ** 0.5
     return (exp_ratio * (to_high - to_low)) + to_low
-
-def low_pass_filter(new_value, last_value, alpha=0.7):
-    """Apply low-pass filter to smooth the signal."""
-    return alpha * new_value + (1 - alpha) * last_value
-
-def stable_brightness(value, min_change=0.05):
-    """Ensure brightness changes are significant to reduce instability."""
-    return value if abs(value) > min_change else 0
 
 # Setup NeoPixel
 pixel_pin = board.D18
@@ -49,11 +37,10 @@ colors = [
 ]
 
 # Setup thresholds and timing for each sensor
-threshold = [300] * 6
+threshold = [800] * 6
 max_raw_value = 1023
 debounce_time = 0.1
 last_impact_time = [0] * 6
-last_filtered_value = [0] * 6
 
 # Calibrate brightness
 to_low = 0.1
@@ -64,18 +51,15 @@ while True:
     current_time = time()
     for i in range(num_pixels):
         raw_value = read_adc(i)
-        filtered_value = low_pass_filter(raw_value, last_filtered_value[i])
-        last_filtered_value[i] = filtered_value
 
         if current_time - last_impact_time[i] > debounce_time:
-            if raw_value > threshold[i]:  # Check raw sensor value for threshold
+            if raw_value > threshold[i]:
                 last_impact_time[i] = current_time
-                brightness = map_value(filtered_value, threshold[i], max_raw_value, to_low, to_high)
-                brightness = stable_brightness(brightness)  # Ensure significant brightness changes
+                brightness = map_value(raw_value, threshold[i], max_raw_value, to_low, to_high)
                 scaled_color = tuple(int(c * brightness) for c in colors[i])
                 pixels[i] = scaled_color
                 pixels.show()
-                print(f"Sensor {i} impact detected with raw value: {raw_value}, filtered value: {filtered_value}, color: {scaled_color}")
+                print(f"Sensor {i} impact detected with raw value: {raw_value}, color: {scaled_color}")
             else:
                 pixels[i] = (0, 0, 0)
                 pixels.show()
